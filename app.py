@@ -115,29 +115,7 @@ elif module == "BMI Calculator":
         if calculate_bmi:
             st.error("Please enter numeric values for weight and height.")
     
-    # No Disclaimer for BMI Calculator
-
-    # Feedback Section for BMI Calculator
-    st.write("### 📝 We value your feedback!")
-    feedback_bmi = st.radio("How accurate was the BMI result?", ["Very Accurate", "Somewhat Accurate", "Not Accurate"])
-    comments_bmi = st.text_area("Additional comments (optional):", placeholder="Your feedback helps us improve!")
-
-    if st.button("Submit Feedback"):
-        if feedback_bmi:
-            # Store feedback and comments for BMI
-            st.session_state.feedback_bmi = {
-                "weight": weight,
-                "height": height,
-                "bmi": bmi,
-                "bmi_category": bmi_category,
-                "feedback": feedback_bmi,
-                "comments": comments_bmi
-            }
-            st.success("Thank you for your feedback!")
-        else:
-            st.warning("Please provide feedback on the BMI result.")
-
-# Footer Section with Powered by Gemini
+    # Footer Section with Powered by Gemini
 footer_color = "#4CAF50"  # Always green for both modules
 st.markdown(f"""
     <hr style="border: 1px solid #4CAF50;">
