@@ -18,19 +18,14 @@ st.set_page_config(page_title="Health Buddy", page_icon="👨‍⚕️", layout=
 st.sidebar.markdown("<h2 style='text-align: center; color: #4CAF50;'>Health Buddy</h2>", unsafe_allow_html=True)
 module = st.sidebar.radio("Navigate to:", ["Health Advice", "BMI Calculator"])
 
-# Function to Get AI Response
-def get_response(text):
-    model = genai.GenerativeModel("gemini-pro")
-    response = model.generate_content(text)
-    return response.text
-
 # Generative AI Response Module
 if module == "Health Advice":
+    # Main Title and Description with improved colors
     st.markdown(f"""
         <div style='text-align: center;'>
-            <h1 style='color: #4CAF50;'>👨‍⚕️ Health Buddy</h1>
+            <h1 style='color: #4CAF50;'>Health Buddy</h1>
             <h3>Your Trusted Health Advisor for Well-being and Guidance </h3>
-            <p>Ask questions, check your BMI, and get personalized health insights instantly.</p>
+            <p class="subtitle">Ask questions, check your BMI, and get personalized health insights instantly.</p>
         </div>
         <hr style="border: 1px solid #4CAF50;">
     """, unsafe_allow_html=True)
@@ -38,29 +33,37 @@ if module == "Health Advice":
     st.write("### 🤔 What would you like to know?")
     input_text = st.text_input("Ask me anything about health:", placeholder="e.g., How to manage stress?", help="Press Enter to submit")
     
-    # Handle form submission
+    # Handle form submission when pressing Enter or clicking the button
     submit_button = st.button("Get Advice")
-
-    # Store user input and feedback in session state
+    
+    # Store user input in session state
     if 'input_text' not in st.session_state:
         st.session_state.input_text = ""
-        st.session_state.feedback = None
 
     if input_text:
         st.session_state.input_text = input_text
 
-    # Show response and feedback option
+    # Function to Get AI Response with Loading Indicator
+    def get_response(text):
+        model = genai.GenerativeModel("gemini-pro")
+        if text:
+            response = model.generate_content(text)
+            return response.text
+        else:
+            st.warning("Please enter a health question to receive advice!")
+
+    # Show loading spinner while fetching advice
     if submit_button or st.session_state.input_text:
         if st.session_state.input_text.strip() == "":
             st.warning("Please enter something.")
         else:
             with st.spinner('Getting advice...'):
-                time.sleep(1.5)
+                time.sleep(1.5)  # Simulate loading
                 response = get_response(st.session_state.input_text)
             st.markdown(f'<div class="response"><h4>🧑‍⚕️ Health Buddy\'s Response:</h4><p>{response}</p></div>', unsafe_allow_html=True)
             st.caption("🔹 Powered by Gemini AI.")
 
-            # Ask for feedback after response
+        # Ask for feedback after response
             st.write("### Was this response helpful?")
             feedback_yes = st.button("👍 Yes, helpful")
             feedback_no = st.button("👎 No, try another response")
@@ -75,7 +78,6 @@ if module == "Health Advice":
                 time.sleep(1.5)
                 new_response = get_response(st.session_state.input_text)
                 st.markdown(f'<div class="response"><h4>🧑‍⚕️ Here\'s an alternative response:</h4><p>{new_response}</p></div>', unsafe_allow_html=True)
-
     st.markdown("""
         <hr style="border: 1px solid #4CAF50;">
         <div style='text-align: center; color: #888; margin-top: 20px;'>
@@ -112,12 +114,35 @@ elif module == "BMI Calculator":
     except ValueError:
         if calculate_bmi:
             st.error("Please enter numeric values for weight and height.")
+    
+    # No Disclaimer for BMI Calculator
+
+    # Feedback Section for BMI Calculator
+    st.write("### 📝 We value your feedback!")
+    feedback_bmi = st.radio("How accurate was the BMI result?", ["Very Accurate", "Somewhat Accurate", "Not Accurate"])
+    comments_bmi = st.text_area("Additional comments (optional):", placeholder="Your feedback helps us improve!")
+
+    if st.button("Submit Feedback"):
+        if feedback_bmi:
+            # Store feedback and comments for BMI
+            st.session_state.feedback_bmi = {
+                "weight": weight,
+                "height": height,
+                "bmi": bmi,
+                "bmi_category": bmi_category,
+                "feedback": feedback_bmi,
+                "comments": comments_bmi
+            }
+            st.success("Thank you for your feedback!")
+        else:
+            st.warning("Please provide feedback on the BMI result.")
 
 # Footer Section with Powered by Gemini
+footer_color = "#4CAF50"  # Always green for both modules
 st.markdown(f"""
     <hr style="border: 1px solid #4CAF50;">
     <div style='text-align: center; margin-top: 20px;'>
         <p><strong style="color: #4CAF50;">Health Buddy</strong> is proudly supported by advanced AI technology to provide reliable insights and advice.</p>
-        <p style='font-size: 0.9em; color: #4CAF50;'>Powered by <span style='color: #4CAF50;'>Gemini AI</span> 🌐</p>
+        <p style='font-size: 0.9em; color: {footer_color};'>Powered by <span style='color: #4CAF50;'>Gemini AI</span> 🌐</p>
     </div>
 """, unsafe_allow_html=True)
