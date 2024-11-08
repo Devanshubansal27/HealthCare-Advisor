@@ -56,5 +56,5 @@ if submit:
 st.subheader("Disclaimer:",divider=True)
 notes=f'''
 1. This is an advisor providing guidance and should not be construced as Medice
-2. Before taking any action, It would be recommended to consult a DOctor.'''
+2. Before taking any action, It would be recommended to consult a Doctor.'''
 st.markdown(notes)
