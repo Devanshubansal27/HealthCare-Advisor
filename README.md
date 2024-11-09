@@ -1,4 +1,4 @@
-# Health Buddy - AI-Powered Healthcare Advisor
+# Health Buddy - AI-Powered Healthcare Advisor 🩺
 <img width="1431" alt="banner" src="https://github.com/user-attachments/assets/f47fc3a8-0d76-4c2e-88b5-4ada871ff1b1">
 
 Get personalized health insights and guidance with Health Buddy.
