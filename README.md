@@ -6,44 +6,40 @@ Health Buddy is a Streamlit application powered by Gemini’s AI that provides h
 
 Features
 
-	• Health Advice: Ask health-related questions and get instant advice from Gemini’s AI.
-    	• BMI Calculator: Calculate your Body Mass Index (BMI) and understand your health status.
-    	• Personalized Insights: Receive tailored advice on maintaining and improving wellness.
- 
+	• Health Advice: Ask general health questions and get AI-powered advice tailored to your concerns.
+	• BMI Calculator: Calculate your Body Mass Index to assess your health status based on weight and height.
+	• AI-Powered Insights: Leverages Google’s Gemini model for generating responses, providing personalized, relevant information.
+
 How to Use
 
-	1. Choose a module:
- 		• Select “Health Advice” to ask health-related questions.
-	  	• Choose “BMI Calculator” to calculate your BMI.
-	2. For Health Advice:
- 		• Type your health question in the input box and submit.
-	   	• Provide feedback if the response is helpful. If not, receive an alternative response.
-	3. For BMI Calculator:
-    		• Enter your weight (in kg) and height (in cm).
-	   	• Click “Calculate BMI” to see your BMI and health category.
+	1. Health Advice: Simply type your health-related query into the input box, and Health Buddy will respond with AI-driven insights. After each response, you can provide feedback on its helpfulness and receive alternative responses if needed.
+	2. BMI Calculator: Enter your weight and height to get your BMI score and an associated health category (e.g., Underweight, Normal, Overweight, Obesity).
 
 Technical Stack
 
 	• Streamlit: For building the interactive web application.
-	• Google GenerativeAI: Provides AI-powered health advice.
-	• Python-dotenv: Manages environment variables (e.g., API keys).
-	• Pandas: Assists in data handling for BMI calculations.
+	• Python-dotenv: For managing environment variables, such as API keys.
+	• Google GenerativeAI: Utilizes Gemini AI for generating health-related advice and responses.
+	• Pandas: For handling data in the BMI calculator.
 
 Installation
-	1. Clone the repository: git clone https://github.com/your-username/Career-Compass.git
 
-  	2. Navigate to the project directory: cd Career-Compass
+	1. Clone the repository: git clone https://github.com/your-username/Health-Buddy.git
+	2. Navigate to the project directory: cd Health-Buddy
+	3. Create a virtual environment: python -m venv .venv
+	4. Activate the virtual environment:
+		• On Windows: .venv\Scripts\activate
+		•On macOS/Linux: source .venv/bin/activate
+	5. Install the dependencies: pip install -r requirements.txt
+	6. Set up your Gemini API key:
+		• Create a .env file in the root directory.
+	        • Add your API key in this format: GOOGLE-API-KEY=your_gemini_api_key_here
+	7. Run the app: streamlit run app.py
 
-  	3. Create a virtual environment: python -m venv .venv
+Example Usage
 
- 	4. Activate the virtual environment:
-  		. On Windows: .venv\Scripts\activate
-     		. On macOS/Linux:   source .venv/bin/activate
-  	5. Install dependencies: pip install -r requirements.txt  
-
-  	6. Set up your OpenAI API key in a .env file.
-
-  	7. Run the app: streamlit run app.py
+	1. For Health Advice: Enter questions like, “How to manage stress?” or “What are the benefits of regular exercise?” in the Health Advice section. You will get AI-driven responses that are tailored for general health and wellness.
+	2. For BMI Calculation: In the BMI Calculator section, enter your weight (in kg) and height (in cm) to calculate your Body Mass Index. The app will also provide a health category based on your BMI score.
 
 Disclaimer
 
